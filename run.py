@@ -46,23 +46,7 @@ def validate_data(values):
         return False
     return True
 
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet,add new row with the list data
-    """
-    print("updating sales worksheet")
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated")
-    
-def update_surplus_worksheet(data):
-    """
-    Update surplus worksheet,add new row with the list data
-    """
-    print("updating surplus worksheet")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(data)
-    print("Surplus worksheet updated")
+
 def update_worksheet(data,worksheet):
     """Receives a list of integers to be inserted into a worksheet.Update the relevant worksheet with the data"""
     print(f"Updating{worksheet} worksheet\n")
@@ -81,7 +65,14 @@ def calculate_surplus_data(sales_row):
         surplus =int(stock) - sales
         surplus_data.append(surplus)
     return surplus_data
-
+def get_last_5_entries_sales():
+    """
+    Collects columns of data of last 5 entries from sales worksheet
+    """
+    sales = SHEET.worksheet("sales")
+    column = sales.col_values(3)
+    print(column)
+    print("hello")
 def main():
     """ Run all programs""" 
     data = get_sales_data()
@@ -91,4 +82,5 @@ def main():
     update_worksheet(new_surplus_data,"surplus")
 
 print("welcome")
-main()
+#main()
+get_last_5_entries_sales()
